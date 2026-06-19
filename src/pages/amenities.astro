@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/layout/Nav';
+import Footer from '../components/layout/Footer.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import FeatureCard from '../components/ui/FeatureCard.astro';
+import AmenitiesGroup from '../components/sections/AmenitiesGroup.astro';
+
+import workspaceImage from '../assets/images/villa-workspace.png';
+import ebikeImage from '../assets/images/villa-ebike.png';
+
+// Icon SVGs for amenities — rendered as static HTML by Astro
+const icons = {
+  floor: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>`,
+  kitchen: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2v20M6 8h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6"/><path d="M18 2v6"/><circle cx="18" cy="5" r="1" fill="currentColor"/></svg>`,
+  climate: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>`,
+  pool: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 12c.6.5 1.2 1 2.5 1C7 13 7 11 9.5 11s2.5 2 5 2 2.5-2 5-2 2.5 2 2.5 2"/><path d="M2 17c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 2.5 2"/><path d="M10 2v3M14 2v3M12 5l2-2M12 5l-2-2"/></svg>`,
+  terrace: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="10" width="18" height="3" rx="1"/><path d="M3 13v8M21 13v8M7 13v8M17 13v8M3 18h18"/></svg>`,
+  lounge: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 9V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2"/><path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/><path d="M4 18v2M20 18v2"/></svg>`,
+  parking: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M10 10h2a2 2 0 1 1 0 4h-2V10z"/><path d="M10 10v8"/></svg>`,
+  laundry: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M12 12m-4 0a4 4 0 1 0 8 0 4 4 0 1 0-8 0"/><path d="M8 6h.01M11 6h5"/></svg>`,
+  checkin: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7.1 12.5 7.4 12.8a.8.8 0 0 0 1.1 0C12.9 22.5 20 15.4 20 10a8 8 0 0 0-8-8z"/></svg>`,
+};
+---
+
+<Layout
+  title="Amenities"
+  description="Discover Villa Calma's thoughtfully curated amenities — from an infinity pool overlooking the Algarve to a remote-work-ready workspace with high-speed fibre internet."
+>
+  <Nav client:load currentPath="/amenities" />
+
+  <main class="pt-20">
+    <!-- Page hero -->
+    <section class="w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 py-20 md:py-28 text-center">
+      <SectionHeader
+        eyebrow="The Experience"
+        heading="Modern Comfort, Timeless Style."
+        body="Experience the intersection of Portuguese heritage and modern luxury. Every detail is curated to enhance your slow-living journey in the Algarve."
+        align="center"
+        data-animate
+      />
+    </section>
+
+    <!-- Feature cards -->
+    <section class="w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 pb-20 md:pb-28">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" data-animate-group>
+        <FeatureCard
+          image={workspaceImage}
+          imageAlt="Minimalist workspace with infinity pool view and Algarve hills"
+          badge="WORKSPACE"
+          title="Remote Work Ready"
+          body="Stay connected effortlessly. High-speed fibre internet paired with a dedicated, minimalist workspace offering inspiring views of the Algarve hills and saltwater infinity pool. Designed for focus."
+          tags={['Fibre Internet', 'Dedicated Desk']}
+          data-animate-card
+        />
+        <FeatureCard
+          image={ebikeImage}
+          imageAlt="Premium e-bike against Portuguese whitewashed wall with bougainvillea"
+          badge="MOBILITY"
+          title="Sustainable Mobility"
+          body="Explore the beauty of Lagos at your own pace. Our premium e-bike rental service provides an eco-friendly and effortless way to navigate the coastline and historic centre."
+          tags={['Premium E-Bikes']}
+          data-animate-card
+        />
+      </div>
+    </section>
+
+    <!-- The Details: grouped amenities -->
+    <section class="w-full bg-surface-low">
+      <div class="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 py-20 md:py-28">
+        <div class="mb-16" data-animate>
+          <span class="text-label-lg text-secondary tracking-widest block mb-3">Every Detail</span>
+          <h2 class="text-headline-lg font-display text-primary">The Details</h2>
+        </div>
+
+        <div class="flex flex-col gap-14 divide-y divide-outline-var">
+          <AmenitiesGroup
+            groupName="The Apartment"
+            items={[
+              { icon: icons.floor, name: 'Lioz Limestone', description: 'Authentic local stone floors.' },
+              { icon: icons.kitchen, name: 'Modern Kitchen', description: 'Fully equipped for culinary exploration.' },
+              { icon: icons.climate, name: 'Climate Control', description: 'Perfect temperature all year round.' },
+            ]}
+            data-animate
+          />
+
+          <div class="pt-14">
+            <AmenitiesGroup
+              groupName="Relaxation"
+              items={[
+                { icon: icons.pool, name: 'Infinity Pool', description: 'Saltwater solar-heated pool.' },
+                { icon: icons.terrace, name: 'Private Terrace', description: 'Sweeping countryside views.' },
+                { icon: icons.lounge, name: 'Sunset Lounge', description: 'Dedicated area for evening relaxation.' },
+              ]}
+              data-animate
+            />
+          </div>
+
+          <div class="pt-14">
+            <AmenitiesGroup
+              groupName="Convenience"
+              items={[
+                { icon: icons.parking, name: 'Secure Parking', description: 'Safe and accessible on-site parking.' },
+                { icon: icons.laundry, name: 'Laundry', description: 'In-unit washing and drying facilities.' },
+                { icon: icons.checkin, name: '24/7 Check-In', description: 'Seamless self check-in, in-process.' },
+              ]}
+              data-animate
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,76 @@
+---
+import { getImage } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/layout/Nav';
+import Footer from '../components/layout/Footer.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import GalleryGrid from '../components/gallery/GalleryGrid';
+import Button from '../components/ui/Button.astro';
+
+import terraceImg from '../assets/images/villa-terrace-hero.png';
+import workspaceImg from '../assets/images/villa-workspace.png';
+import beachImg from '../assets/images/meia-praia-beach.png';
+import ebikeImg from '../assets/images/villa-ebike.png';
+
+// Process all images to optimized WebP at build time
+const [terrace1, terrace2, workspace1, workspace2, beach1, beach2, ebike1, ebike2] =
+  await Promise.all([
+    getImage({ src: terraceImg, width: 900, format: 'webp', quality: 85 }),
+    getImage({ src: terraceImg, width: 600, format: 'webp', quality: 80 }),
+    getImage({ src: workspaceImg, width: 900, format: 'webp', quality: 85 }),
+    getImage({ src: workspaceImg, width: 600, format: 'webp', quality: 80 }),
+    getImage({ src: beachImg, width: 900, format: 'webp', quality: 85 }),
+    getImage({ src: beachImg, width: 600, format: 'webp', quality: 80 }),
+    getImage({ src: ebikeImg, width: 900, format: 'webp', quality: 85 }),
+    getImage({ src: ebikeImg, width: 600, format: 'webp', quality: 80 }),
+  ]);
+
+const galleryImages = [
+  { src: terrace1.src, width: 900, height: 600, alt: 'Villa Calma terrace at sunset', category: 'property-interior' as const },
+  { src: workspace1.src, width: 900, height: 675, alt: 'Minimalist workspace with infinity pool view', category: 'property-interior' as const },
+  { src: beach1.src, width: 900, height: 500, alt: 'Aerial view of Meia Praia beach', category: 'surrounding-area' as const },
+  { src: ebike1.src, width: 900, height: 675, alt: 'Premium e-bike against whitewashed Algarve wall', category: 'nearby-attractions' as const },
+  { src: terrace2.src, width: 600, height: 450, alt: 'Villa Calma outdoor terrace with garden', category: 'property-interior' as const },
+  { src: beach2.src, width: 600, height: 338, alt: 'Golden cliffs and Atlantic ocean at Meia Praia', category: 'surrounding-area' as const },
+  { src: workspace2.src, width: 600, height: 450, alt: 'Workspace with panoramic Algarve views', category: 'swimming-pool' as const },
+  { src: ebike2.src, width: 600, height: 450, alt: 'Coastal cycling route along the Algarve', category: 'nearby-attractions' as const },
+];
+---
+
+<Layout
+  title="Gallery"
+  description="Explore Villa Calma through our gallery — the terrace, infinity pool, surrounding beaches, and the breathtaking landscape of the Algarve."
+>
+  <Nav client:load currentPath="/gallery" />
+
+  <main class="pt-20">
+    <section class="w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 py-20 md:py-28">
+      <div class="mb-14 text-center" data-animate>
+        <SectionHeader
+          eyebrow="Visual Journey"
+          heading="The Gallery"
+          body="Discover the beauty of Villa Calma and its surroundings through the lens — from the intimate interiors to the boundless Algarve landscape."
+          align="center"
+        />
+      </div>
+
+      <GalleryGrid images={galleryImages} client:visible />
+    </section>
+
+    <!-- CTA -->
+    <section class="w-full bg-surface-container py-20 md:py-28">
+      <div class="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 text-center" data-animate>
+        <h2 class="text-headline-lg font-display text-primary mb-4">Experience Villa Calma</h2>
+        <p class="font-body text-on-surface-var text-lg leading-relaxed mb-10 max-w-md mx-auto">
+          Ready to make this your view? Secure your dates today.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button href="https://www.airbnb.com" variant="secondary" external>Book on Airbnb</Button>
+          <Button href="https://www.booking.com" variant="outline" external>Book on Booking.com</Button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

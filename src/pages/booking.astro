@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/layout/Nav';
+import Footer from '../components/layout/Footer.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import BookingCard from '../components/ui/BookingCard.astro';
+import ExpectItem from '../components/ui/ExpectItem.astro';
+
+const icons = {
+  key: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="M21 2l-9.6 9.6"/><path d="M15.5 7.5l3 3L22 7l-3-3"/></svg>`,
+  book: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`,
+  headset: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>`,
+};
+---
+
+<Layout
+  title="Book Your Stay"
+  description="Reserve your dates at Villa Calma through Airbnb or Booking.com. Seamless check-in, personalised welcome guide, and 24/7 local support included."
+>
+  <Nav client:load currentPath="/booking" />
+
+  <main class="pt-20">
+    <!-- Page header -->
+    <section class="w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 py-20 md:py-28 text-center">
+      <SectionHeader
+        eyebrow="Reserve Your Stay"
+        heading="Begin Your Journey"
+        body="Experience the art of slow living in the Algarve. Choose your preferred platform to secure your dates at Villa Calma, where modern minimalism meets Mediterranean warmth."
+        align="center"
+        data-animate
+      />
+    </section>
+
+    <!-- Booking platform cards -->
+    <section class="w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 pb-20 md:pb-28">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto" data-animate-group>
+        <BookingCard
+          platform="airbnb"
+          title="Book on Airbnb"
+          body="Secure your stay through Airbnb's trusted platform. Benefit from their comprehensive guest protection and intuitive booking experience."
+          href="https://www.airbnb.com"
+          ctaLabel="Continue to Airbnb"
+          data-animate-card
+        />
+        <BookingCard
+          platform="booking"
+          title="Book on Booking.com"
+          body="Reserve your dates instantly via Booking.com. Enjoy flexible cancellation options and instant confirmation for your peace of mind."
+          href="https://www.booking.com"
+          ctaLabel="Continue to Booking.com"
+          data-animate-card
+        />
+      </div>
+    </section>
+
+    <!-- What to Expect -->
+    <section class="w-full bg-surface-low py-20 md:py-28">
+      <div class="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16">
+        <div class="text-center mb-14" data-animate>
+          <h2 class="text-headline-lg font-display text-primary">What to Expect</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" data-animate-group>
+          <ExpectItem
+            icon={icons.key}
+            title="Seamless Self Check-In"
+            body="Arrive at your own pace with our secure, contactless digital entry system."
+            data-animate-card
+          />
+          <ExpectItem
+            icon={icons.book}
+            title="Personalised Welcome Guide"
+            body="A curated manual detailing villa amenities and our favourite local Algarve spots."
+            data-animate-card
+          />
+          <ExpectItem
+            icon={icons.headset}
+            title="24/7 Local Support"
+            body="Our dedicated concierge is always available to assist with any requests during your stay."
+            data-animate-card
+          />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

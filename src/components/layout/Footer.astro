@@ -1,0 +1,76 @@
+---
+const year = new Date().getFullYear();
+
+const footerLinks = [
+  { href: 'https://maps.google.com/?q=Vale+da+Ribeira+Lagos+Portugal', label: 'Location', external: true },
+  { href: 'mailto:contact@villacalma.com', label: 'Contact', external: false },
+  { href: '/privacy-policy', label: 'Privacy Policy', external: false },
+];
+
+const socialLinks = [
+  { href: '#', label: 'Instagram' },
+  { href: '#', label: 'LinkedIn' },
+];
+---
+
+<footer class="bg-primary text-on-primary">
+  <div class="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 py-16 md:py-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 pb-12 border-b border-white/10">
+      <!-- Brand -->
+      <div class="flex flex-col gap-3">
+        <a href="/" class="font-display font-semibold text-2xl text-white hover:text-white/80 transition-colors">
+          Villa Calma
+        </a>
+        <p class="font-body text-white/60 text-sm leading-relaxed max-w-xs">
+          Crafted in Vale da Ribeira, Lagos.<br />
+          Where the Algarve meets modern comfort.
+        </p>
+      </div>
+
+      <!-- Links -->
+      <div class="flex flex-col sm:flex-row gap-8 md:justify-end">
+        <nav aria-label="Footer navigation">
+          <ul class="flex flex-col gap-3 list-none p-0 m-0">
+            {footerLinks.map(({ href, label, external }) => (
+              <li>
+                <a
+                  href={href}
+                  class="font-body text-sm text-white/70 hover:text-white transition-colors"
+                  {...external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <nav aria-label="Social links">
+          <ul class="flex flex-col gap-3 list-none p-0 m-0">
+            {socialLinks.map(({ href, label }) => (
+              <li>
+                <a
+                  href={href}
+                  class="font-body text-sm text-white/70 hover:text-white transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <div class="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <p class="font-body text-xs text-white/40">
+        &copy; {year} Villa Calma. All rights reserved.
+      </p>
+      <p class="font-body text-xs text-white/30">
+        Lagos, Algarve, Portugal
+      </p>
+    </div>
+  </div>
+</footer>

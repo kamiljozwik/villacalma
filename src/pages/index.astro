@@ -1,15 +1,149 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-import "../styles/global.css";
+import Nav from '../components/layout/Nav';
+import Footer from '../components/layout/Footer.astro';
+import Hero from '../components/sections/Hero.astro';
+import BeachSection from '../components/sections/BeachSection.astro';
+import FeatureCard from '../components/ui/FeatureCard.astro';
+import Button from '../components/ui/Button.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import heroImage from '../assets/images/villa-terrace-hero.png';
+import workspaceImage from '../assets/images/villa-workspace.png';
+import ebikeImage from '../assets/images/villa-ebike.png';
+import beachImage from '../assets/images/meia-praia-beach.png';
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'LodgingBusiness',
+  name: 'Villa Calma',
+  description:
+    'Luxury villa rental in Vale da Ribeira, Lagos, Algarve, Portugal. Modern comfort meets Mediterranean heritage.',
+  url: 'https://villacalma.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Vale da Ribeira',
+    addressLocality: 'Lagos',
+    addressRegion: 'Algarve',
+    addressCountry: 'PT',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 37.1,
+    longitude: -8.67,
+  },
+  amenityFeature: [
+    { '@type': 'LocationFeatureSpecification', name: 'Infinity Pool', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'High-speed Wi-Fi', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Private Terrace', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Secure Parking', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Lioz Limestone Floors', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Electric Bike Rental', value: true },
+  ],
+});
 ---
 
-<Layout>
-<h1 class="text-3xl font-bold underline text-red-500">
-  Hello world!
-</h1>
-	<Welcome />
+<Layout
+  title="Luxury Villa in the Algarve"
+  description="Villa Calma — a curated luxury retreat in Vale da Ribeira, Lagos. Experience the soul of the Algarve where modern minimalism meets Mediterranean warmth."
+  jsonLd={jsonLd}
+>
+  <Nav client:load currentPath="/" transparentHero={true} />
+
+  <main>
+    <!-- Hero -->
+    <Hero
+      headline="The Soul of the Algarve, Rediscovered."
+      subheadline="A curated retreat in Vale da Ribeira, Lagos — where slow living meets quiet luxury."
+      ctaLabel="Begin Your Journey"
+      ctaHref="/booking"
+      image={heroImage}
+      imageAlt="Villa Calma terrace at golden hour overlooking the Algarve hills"
+    />
+
+    <!-- Editorial intro -->
+    <section class="w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 py-20 md:py-28">
+      <div class="max-w-xl" data-animate>
+        <span class="text-label-lg text-secondary tracking-widest block mb-4">The Villa</span>
+        <h2 class="text-headline-lg font-display text-primary mb-6">
+          Quiet Beauty at Meia Praia's Veranda
+        </h2>
+        <p class="font-body text-on-surface-var text-lg leading-relaxed mb-8">
+          Nestled between golden cliffs and the Atlantic, Villa Calma is more than a place to stay —
+          it's a way of being. Every detail has been considered to let you breathe, rest, and rediscover
+          the art of slow living.
+        </p>
+        <Button href="/amenities" variant="outline">Explore the Space</Button>
+      </div>
+    </section>
+
+    <!-- Feature cards: Designed for Living -->
+    <section class="w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 pb-20 md:pb-28">
+      <div class="mb-12" data-animate>
+        <span class="text-label-lg text-secondary tracking-widest block mb-3">Designed for Living</span>
+        <h2 class="text-headline-lg font-display text-primary">Modern Comfort, Timeless Style.</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" data-animate-group>
+        <FeatureCard
+          image={workspaceImage}
+          imageAlt="Minimalist workspace with infinity pool view"
+          badge="WORKSPACE"
+          title="Remote Work Ready"
+          body="Stay connected effortlessly. High-speed fibre internet paired with a dedicated, minimalist workspace offering inspiring views of the Algarve hills and saltwater infinity pool."
+          tags={['Fibre Internet', 'Dedicated Desk']}
+          data-animate-card
+        />
+        <FeatureCard
+          image={ebikeImage}
+          imageAlt="Premium e-bike against Portuguese whitewashed wall with bougainvillea"
+          badge="MOBILITY"
+          title="Sustainable Mobility"
+          body="Explore the beauty of Lagos at your own pace. Our premium e-bike rental service provides an eco-friendly and effortless way to navigate the coastline and historic centre."
+          tags={['Premium E-Bikes']}
+          data-animate-card
+        />
+      </div>
+    </section>
+
+    <!-- Full-bleed beach discovery -->
+    <BeachSection
+      eyebrow="Discover the Golden Coast"
+      heading="Meia Praia"
+      body="Three kilometres of unspoilt sand, where the Atlantic meets the Algarve's golden cliffs. Your private beach, just minutes from the villa."
+      image={beachImage}
+      imageAlt="Aerial view of Meia Praia beach at golden hour"
+      fullBleed={true}
+      data-animate
+    />
+
+    <!-- Meia Praia editorial -->
+    <BeachSection
+      eyebrow="Your Neighbourhood"
+      heading="Between the Cliffs and the Sea"
+      body="Lagos is one of Portugal's most cherished coastal towns — a place where ancient fortified walls meet vibrant local culture. From the villa, the town's cafés, markets, and hidden beaches are all within easy reach."
+      image={beachImage}
+      imageAlt="Meia Praia beach with cliffs and turquoise water"
+      imagePosition="left"
+      data-animate
+    />
+
+    <!-- CTA -->
+    <section class="w-full bg-surface-container py-20 md:py-28">
+      <div class="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 text-center" data-animate>
+        <span class="text-label-lg text-secondary tracking-widest block mb-4">Reserve Your Stay</span>
+        <h2 class="text-headline-lg font-display text-primary mb-6 max-w-lg mx-auto">
+          Ready to Experience Slow Living?
+        </h2>
+        <p class="font-body text-on-surface-var text-lg leading-relaxed mb-10 max-w-md mx-auto">
+          Choose your preferred platform to secure your dates at Villa Calma.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button href="/booking" variant="secondary">Book on Airbnb</Button>
+          <Button href="/booking" variant="outline">Book on Booking.com</Button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
 </Layout>

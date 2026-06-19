@@ -1,0 +1,96 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/layout/Nav';
+import Footer from '../components/layout/Footer.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import BeachSection from '../components/sections/BeachSection.astro';
+import FeatureCard from '../components/ui/FeatureCard.astro';
+
+import beachImage from '../assets/images/meia-praia-beach.png';
+import ebikeImage from '../assets/images/villa-ebike.png';
+import workspaceImage from '../assets/images/villa-workspace.png';
+---
+
+<Layout
+  title="Local Attractions"
+  description="Discover the treasures beyond Villa Calma's gates. From the pristine sands of Meia Praia to the ancient streets of Lagos Old Town — the Algarve awaits."
+>
+  <Nav client:load currentPath="/attractions" transparentHero={false} />
+
+  <main class="pt-20">
+    <!-- Page hero text -->
+    <section class="w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 py-20 md:py-28">
+      <SectionHeader
+        eyebrow="Discover"
+        heading="Beyond the Gates"
+        body="The Algarve is one of Europe's most storied coastlines. Step outside Villa Calma and find yourself immersed in golden beaches, ancient towns, and a landscape shaped by centuries of sea and sun."
+        align="left"
+        data-animate
+      />
+    </section>
+
+    <!-- Golden Hours beach section -->
+    <BeachSection
+      eyebrow="Golden Hours"
+      heading="Meia Praia"
+      body="Stretching for three kilometres between Lagos and Alvor, Meia Praia is one of the Algarve's most beloved beaches. Calm waters, golden sand, and a handful of excellent beach restaurants make it the perfect escape — a five-minute drive from the villa."
+      image={beachImage}
+      imageAlt="Aerial view of Meia Praia beach at golden hour with golden cliffs"
+      imagePosition="right"
+      data-animate
+    />
+
+    <!-- Full-bleed separator -->
+    <section class="w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 py-10 md:py-16 text-center">
+      <div class="w-12 h-px bg-secondary mx-auto"></div>
+    </section>
+
+    <!-- Lagos Old Town -->
+    <BeachSection
+      eyebrow="Lagos Old Town"
+      heading="A City Written in Stone"
+      body="Wander through the cobbled lanes of Lagos — a place where 16th-century Moorish walls frame colourful azulejo tiles and fishermen still bring the daily catch to market. The historic centre is a twenty-minute walk from the villa, or a five-minute ride on one of the villa's e-bikes."
+      image={workspaceImage}
+      imageAlt="Lagos old town with historic architecture and coastline view"
+      imagePosition="left"
+      data-animate
+    />
+
+    <!-- Designed for Movement -->
+    <section class="w-full bg-surface-low py-20 md:py-28">
+      <div class="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16">
+        <div class="mb-14" data-animate>
+          <span class="text-label-lg text-secondary tracking-widest block mb-3">Activities</span>
+          <h2 class="text-headline-lg font-display text-primary">Designed for Movement</h2>
+          <p class="font-body text-on-surface-var text-lg leading-relaxed mt-4 max-w-xl">
+            Whether you prefer to glide along coastal paths on an e-bike or kayak through sea caves,
+            the Algarve offers a playground for the curious traveller.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" data-animate-group>
+          <FeatureCard
+            image={ebikeImage}
+            imageAlt="E-bike on a scenic Portuguese coastal route"
+            badge="CYCLING"
+            title="Coastal Cycling Routes"
+            body="The Ecovia do Litoral cycling path runs through some of the Algarve's most dramatic scenery. The villa's premium e-bikes make it accessible to all fitness levels, letting you cover more ground and arrive fresh."
+            tags={['E-Bike Included', 'All Levels']}
+            data-animate-card
+          />
+          <FeatureCard
+            image={beachImage}
+            imageAlt="Sea caves and kayaks along the Algarve coastline"
+            badge="WATER"
+            title="Sea Caves & Kayaking"
+            body="The grottos and sea arches of Ponta da Piedade are among the Algarve's most photographed natural wonders. Join a guided kayak tour and paddle through azure grottoes and hidden coves."
+            tags={['Guided Tours', 'Near the Villa']}
+            data-animate-card
+          />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

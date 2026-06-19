@@ -1,0 +1,37 @@
+---
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  body?: string;
+  align?: 'left' | 'center';
+  headingSize?: 'display' | 'lg' | 'md';
+  'data-animate'?: string;
+}
+
+const {
+  eyebrow,
+  heading,
+  body,
+  align = 'center',
+  headingSize = 'lg',
+  'data-animate': dataAnimate,
+} = Astro.props;
+
+const alignClass = align === 'center' ? 'text-center items-center' : 'text-left items-start';
+const headingClass =
+  headingSize === 'display'
+    ? 'text-display-lg'
+    : headingSize === 'lg'
+    ? 'text-headline-lg'
+    : 'text-headline-md';
+---
+
+<div class={`flex flex-col gap-4 ${alignClass} max-w-2xl ${align === 'center' ? 'mx-auto' : ''}`} data-animate={dataAnimate}>
+  {eyebrow && (
+    <span class="text-label-lg text-secondary tracking-widest">{eyebrow}</span>
+  )}
+  <h2 class={`${headingClass} font-display text-primary`}>{heading}</h2>
+  {body && (
+    <p class="font-body text-lg text-on-surface-var leading-relaxed mt-2">{body}</p>
+  )}
+</div>

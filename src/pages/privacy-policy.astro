@@ -1,0 +1,76 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/layout/Nav';
+import Footer from '../components/layout/Footer.astro';
+---
+
+<Layout
+  title="Privacy Policy"
+  description="Privacy policy for Villa Calma — how we collect, use, and protect your personal information."
+>
+  <Nav client:load currentPath="/privacy-policy" />
+
+  <main class="pt-20">
+    <section class="w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 py-20 md:py-28">
+      <div class="max-w-2xl">
+        <span class="text-label-lg text-secondary tracking-widest block mb-4">Legal</span>
+        <h1 class="text-headline-lg font-display text-primary mb-10">Privacy Policy</h1>
+
+        <div class="prose font-body text-on-surface-var leading-relaxed space-y-8">
+          <section>
+            <h2 class="font-display text-primary text-xl font-medium mb-3">1. Information We Collect</h2>
+            <p>
+              Villa Calma is a static informational website. We do not directly collect personal data
+              through this site. Bookings are processed through third-party platforms (Airbnb,
+              Booking.com), each governed by their own privacy policies.
+            </p>
+          </section>
+
+          <section>
+            <h2 class="font-display text-primary text-xl font-medium mb-3">2. Contact Communications</h2>
+            <p>
+              If you contact us via email at{' '}
+              <a href="mailto:contact@villacalma.com" class="text-secondary underline">
+                contact@villacalma.com
+              </a>
+              , we will use your contact information solely to respond to your enquiry.
+            </p>
+          </section>
+
+          <section>
+            <h2 class="font-display text-primary text-xl font-medium mb-3">3. Third-Party Services</h2>
+            <p>
+              This site is hosted on GitHub Pages. Please refer to GitHub's privacy policy for
+              information on how they handle server access logs and related data.
+            </p>
+          </section>
+
+          <section>
+            <h2 class="font-display text-primary text-xl font-medium mb-3">4. Cookies</h2>
+            <p>
+              This website does not use cookies or tracking technologies. No analytics or advertising
+              scripts are loaded.
+            </p>
+          </section>
+
+          <section>
+            <h2 class="font-display text-primary text-xl font-medium mb-3">5. Contact</h2>
+            <p>
+              For any privacy-related questions, please contact us at{' '}
+              <a href="mailto:contact@villacalma.com" class="text-secondary underline">
+                contact@villacalma.com
+              </a>
+              .
+            </p>
+          </section>
+
+          <p class="text-sm text-on-surface-var/60 pt-4">
+            Last updated: {new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

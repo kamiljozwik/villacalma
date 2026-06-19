@@ -1,0 +1,76 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Button from '../ui/Button.astro';
+
+interface Props {
+  headline: string;
+  subheadline?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  image: ImageMetadata;
+  imageAlt?: string;
+  minHeight?: string;
+}
+
+const {
+  headline,
+  subheadline,
+  ctaLabel,
+  ctaHref = '/booking',
+  image,
+  imageAlt = 'Villa Calma',
+  minHeight = 'min-h-screen',
+} = Astro.props;
+
+const words = headline.split(' ');
+---
+
+<section class={`relative ${minHeight} flex items-center overflow-hidden`}>
+  <!-- Background image with parallax wrapper -->
+  <div
+    class="absolute inset-0 w-full h-full"
+    data-hero-image
+    aria-hidden="true"
+  >
+    <Image
+      src={image}
+      alt={imageAlt}
+      width={1920}
+      height={1080}
+      loading="eager"
+      fetchpriority="high"
+      class="w-full h-full object-cover scale-110"
+    />
+    <!-- Gradient overlay for text legibility -->
+    <div class="absolute inset-0 bg-gradient-to-r from-primary/70 via-primary/40 to-transparent"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 py-32 md:py-40">
+    <div class="max-w-2xl">
+      <h1 class="text-display-lg text-on-primary mb-6">
+        {words.map((word, i) => (
+          <span data-word class="inline-block mr-[0.25em] last:mr-0">{word}</span>
+        ))}
+      </h1>
+
+      {subheadline && (
+        <p
+          data-hero-sub
+          class="font-body text-xl text-white/80 leading-relaxed mb-8 max-w-lg"
+        >
+          {subheadline}
+        </p>
+      )}
+
+      {ctaLabel && (
+        <div data-hero-sub>
+          <Button href={ctaHref} variant="secondary" size="md">
+            {ctaLabel}
+          </Button>
+        </div>
+      )}
+    </div>
+  </div>
+</section>

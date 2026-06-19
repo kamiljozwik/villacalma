@@ -1,0 +1,33 @@
+---
+interface AmenityItem {
+  icon: string;
+  name: string;
+  description: string;
+}
+
+interface Props {
+  groupName: string;
+  items: AmenityItem[];
+  'data-animate'?: string;
+}
+
+const { groupName, items, 'data-animate': dataAnimate } = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-8 items-start" data-animate={dataAnimate}>
+  <div class="md:pt-1">
+    <h3 class="font-display text-primary font-medium text-xl">{groupName}</h3>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6">
+    {items.map(({ icon, name, description }) => (
+      <div class="flex gap-4 items-start">
+        <div class="w-5 h-5 mt-0.5 flex-shrink-0 text-secondary" set:html={icon} />
+        <div>
+          <p class="font-body font-semibold text-on-surface text-sm">{name}</p>
+          <p class="font-body text-on-surface-var text-sm mt-0.5 leading-relaxed">{description}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  image: ImageMetadata;
+  imageAlt: string;
+  badge: string;
+  title: string;
+  body: string;
+  tags?: string[];
+  'data-animate-card'?: string;
+}
+
+const { image, imageAlt, badge, title, body, tags = [], 'data-animate-card': dataAnimateCard } = Astro.props;
+---
+
+<article
+  class="flex flex-col bg-surface-low border border-outline-var rounded-lg overflow-hidden group hover:shadow-[0_8px_32px_rgba(0,30,51,0.08)] transition-shadow duration-300"
+  data-animate-card={dataAnimateCard}
+>
+  <div class="relative overflow-hidden aspect-[4/3]">
+    <Image
+      src={image}
+      alt={imageAlt}
+      width={800}
+      height={600}
+      loading="lazy"
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+    />
+    <div class="absolute top-4 left-4">
+      <span class="text-label-sm bg-primary/90 text-on-primary px-3 py-1.5 rounded-sm backdrop-blur-sm">
+        {badge}
+      </span>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-4 p-6 md:p-8">
+    <h3 class="text-headline-md font-display text-primary">{title}</h3>
+    <p class="font-body text-on-surface-var text-base leading-relaxed">{body}</p>
+
+    {tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mt-1">
+        {tags.map((tag) => (
+          <span class="flex items-center gap-1.5 text-label-sm text-on-surface-var bg-surface-high px-3 py-1.5 rounded-sm">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+  </div>
+</article>
