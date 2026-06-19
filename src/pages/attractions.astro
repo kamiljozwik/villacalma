@@ -5,6 +5,7 @@ import Footer from '../components/layout/Footer.astro';
 import SectionHeader from '../components/ui/SectionHeader.astro';
 import BeachSection from '../components/sections/BeachSection.astro';
 import FeatureCard from '../components/ui/FeatureCard.astro';
+import AttractionCard from '../components/ui/AttractionCard.astro';
 
 import beachImage from '../assets/images/meia-praia-beach.png';
 import ebikeImage from '../assets/images/villa-ebike.png';
@@ -13,59 +14,104 @@ import workspaceImage from '../assets/images/villa-workspace.png';
 
 <Layout
   title="Local Attractions"
-  description="Discover the treasures beyond Villa Calma's gates. From the pristine sands of Meia Praia to the ancient streets of Lagos Old Town — the Algarve awaits."
+  description="Discover the treasures beyond Villa Calma's gates. From golden beaches and ancient sea caves to the end of Europe — the Algarve awaits."
 >
   <Nav client:load currentPath="/attractions" transparentHero={false} />
 
   <main class="pt-20">
+
     <!-- Page hero text -->
     <section class="w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 py-20 md:py-28">
       <SectionHeader
         eyebrow="Discover"
         heading="Beyond the Gates"
-        body="The Algarve is one of Europe's most storied coastlines. Step outside Villa Calma and find yourself immersed in golden beaches, ancient towns, and a landscape shaped by centuries of sea and sun."
+        body="The Algarve is one of Europe's most storied coastlines. Step outside Villa Calma and find yourself immersed in golden beaches, ancient towns, sea caves, and a landscape shaped by centuries of sea and sun."
         align="left"
         data-animate
       />
     </section>
 
-    <!-- Golden Hours beach section -->
+    <!-- Featured: Meia Praia -->
     <BeachSection
       eyebrow="Golden Hours"
       heading="Meia Praia"
       body="Stretching for three kilometres between Lagos and Alvor, Meia Praia is one of the Algarve's most beloved beaches. Calm waters, golden sand, and a handful of excellent beach restaurants make it the perfect escape — a five-minute drive from the villa."
       image={beachImage}
-      imageAlt="Aerial view of Meia Praia beach at golden hour with golden cliffs"
+      imageAlt="Aerial view of Meia Praia beach at golden hour"
       imagePosition="right"
       data-animate
     />
 
-    <!-- Full-bleed separator -->
+    <!-- Separator -->
     <section class="w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 py-10 md:py-16 text-center">
       <div class="w-12 h-px bg-secondary mx-auto"></div>
     </section>
 
-    <!-- Lagos Old Town -->
+    <!-- Featured: Lagos Old Town -->
     <BeachSection
       eyebrow="Lagos Old Town"
       heading="A City Written in Stone"
       body="Wander through the cobbled lanes of Lagos — a place where 16th-century Moorish walls frame colourful azulejo tiles and fishermen still bring the daily catch to market. The historic centre is a twenty-minute walk from the villa, or a five-minute ride on one of the villa's e-bikes."
       image={workspaceImage}
-      imageAlt="Lagos old town with historic architecture and coastline view"
+      imageAlt="Lagos old town historic architecture"
       imagePosition="left"
       data-animate
     />
 
-    <!-- Designed for Movement -->
+    <!-- More Beaches -->
     <section class="w-full bg-surface-low py-20 md:py-28">
       <div class="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16">
         <div class="mb-14" data-animate>
-          <span class="text-label-lg text-secondary tracking-widest block mb-3">Activities</span>
-          <h2 class="text-headline-lg font-display text-primary">Designed for Movement</h2>
-          <p class="font-body text-on-surface-var text-lg leading-relaxed mt-4 max-w-xl">
-            Whether you prefer to glide along coastal paths on an e-bike or kayak through sea caves,
-            the Algarve offers a playground for the curious traveller.
-          </p>
+          <SectionHeader
+            eyebrow="More Beaches"
+            heading="Further Along the Shore"
+            body="Within a short drive, the coastline opens up into a string of dramatic coves, each with its own character."
+            align="left"
+          />
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-animate-group>
+          <AttractionCard
+            badge="BEACH"
+            category="beach"
+            title="Praia Dona Ana"
+            distance="8 min drive"
+            body="Hemmed in by sculpted amber limestone cliffs, Dona Ana is one of the Algarve's most photographed beaches. Clear turquoise water and dramatic rock formations make it perfect for snorkelling and photography."
+            tags={['Snorkelling', 'Iconic Cliffs']}
+            data-animate-card
+          />
+          <AttractionCard
+            badge="BEACH"
+            category="beach"
+            title="Praia do Camilo"
+            distance="10 min drive"
+            body="A hidden gem reached by a wooden staircase of 200 steps, Camilo rewards the effort with crystal-clear water and wild, rugged scenery. One of the quietest and most dramatic beaches near Lagos."
+            tags={['Secluded', 'Wild Scenery']}
+            data-animate-card
+          />
+          <AttractionCard
+            badge="BEACH"
+            category="beach"
+            title="Praia da Luz"
+            distance="15 min drive"
+            body="A crescent of golden sand stretching a kilometre in front of a charming fishing village. Blue Flag certified, with calm waters ideal for families and a promenade of good seafood restaurants."
+            tags={['Blue Flag', 'Village Promenade']}
+            data-animate-card
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Activities -->
+    <section class="w-full py-20 md:py-28">
+      <div class="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16">
+        <div class="mb-14" data-animate>
+          <SectionHeader
+            eyebrow="Activities"
+            heading="Designed for Movement"
+            body="Whether you glide along coastal paths on an e-bike or kayak through sea caves, the Algarve offers a playground for the curious traveller."
+            align="left"
+          />
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" data-animate-group>
@@ -83,13 +129,102 @@ import workspaceImage from '../assets/images/villa-workspace.png';
             imageAlt="Sea caves and kayaks along the Algarve coastline"
             badge="WATER"
             title="Sea Caves & Kayaking"
-            body="The grottos and sea arches of Ponta da Piedade are among the Algarve's most photographed natural wonders. Join a guided kayak tour and paddle through azure grottoes and hidden coves."
+            body="The grottos and sea arches of Ponta da Piedade are among the Algarve's most photographed natural wonders. Join a guided kayak tour and paddle through azure grottoes and hidden coves just minutes from the villa."
             tags={['Guided Tours', 'Near the Villa']}
             data-animate-card
           />
         </div>
       </div>
     </section>
+
+    <!-- Natural Wonders & Landmarks -->
+    <section class="w-full bg-surface-low py-20 md:py-28">
+      <div class="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16">
+        <div class="mb-14" data-animate>
+          <SectionHeader
+            eyebrow="Landmarks"
+            heading="Natural Wonders & Icons"
+            body="From sea-sculpted headlands to the edge of the known world — these are the sights that stay with you."
+            align="left"
+          />
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-animate-group>
+          <AttractionCard
+            badge="NATURE"
+            category="nature"
+            title="Ponta da Piedade"
+            distance="12 min drive"
+            body="The Algarve's most spectacular headland: a labyrinth of amber sea stacks, hidden grottos and sea arches carved by the Atlantic. Walk the clifftop path at sunset or kayak through the grottoes at water level."
+            tags={['Clifftop Walk', 'Kayak Access']}
+            data-animate-card
+          />
+          <AttractionCard
+            badge="LANDMARK"
+            category="nature"
+            title="Cabo de São Vicente"
+            distance="35 min drive"
+            body="The southwesternmost tip of continental Europe — where the land runs out and the Atlantic begins. Standing on the 75-metre cliffs beside the working lighthouse is a genuinely humbling experience."
+            tags={['End of Europe', 'Sagres Nearby']}
+            data-animate-card
+          />
+          <AttractionCard
+            badge="MOTORSPORT"
+            category="adventure"
+            title="Autódromo do Algarve"
+            distance="25 min drive"
+            body="Home to Formula 1, MotoGP and WorldSBK rounds, this world-class circuit welcomes visitors on track-day experiences, hot laps, and guided tours year-round. A unique thrill just down the road from Lagos."
+            tags={['Track Days', 'F1 & MotoGP Venue']}
+            data-animate-card
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Villages & Day Trips -->
+    <section class="w-full py-20 md:py-28">
+      <div class="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16">
+        <div class="mb-14" data-animate>
+          <SectionHeader
+            eyebrow="Day Trips"
+            heading="Villages Worth the Drive"
+            body="Venture a little further and discover the quieter, more authentic face of southern Portugal."
+            align="left"
+          />
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-animate-group>
+          <AttractionCard
+            badge="VILLAGE"
+            category="culture"
+            title="Alvor"
+            distance="15 min drive"
+            body="A whitewashed fishing village perched above a tidal estuary, Alvor has preserved its soul despite its proximity to Portimão. Wander the Moorish lanes, cross the boardwalk over the estuary, and end with freshly grilled fish."
+            tags={['Estuary Boardwalk', 'Seafood']}
+            data-animate-card
+          />
+          <AttractionCard
+            badge="HISTORY"
+            category="culture"
+            title="Silves"
+            distance="45 min drive"
+            body="Once the Moorish capital of the Algarve, Silves is dominated by a perfectly preserved red sandstone castle. The town below is known for its annual Medieval Fair and some of the region's finest citrus groves."
+            tags={['Medieval Castle', 'UNESCO Heritage']}
+            data-animate-card
+          />
+          <AttractionCard
+            badge="MOUNTAIN"
+            category="nature"
+            title="Monchique"
+            distance="50 min drive"
+            body="Escape the coast and climb to this mountain village in the Serra de Monchique. The panoramic views over the Algarve are extraordinary, and the local medronho — a potent arbutus berry spirit — is not to be missed."
+            tags={['Panoramic Views', 'Local Spirits']}
+            data-animate-card
+          />
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <Footer />

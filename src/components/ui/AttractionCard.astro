@@ -1,0 +1,80 @@
+---
+interface Props {
+  badge: string;
+  category?: 'beach' | 'nature' | 'culture' | 'adventure';
+  title: string;
+  distance: string;
+  body: string;
+  tags?: string[];
+  'data-animate-card'?: string | boolean;
+}
+
+const {
+  badge,
+  category = 'nature',
+  title,
+  distance,
+  body,
+  tags = [],
+  'data-animate-card': dataAnimateCard,
+} = Astro.props;
+
+const gradients: Record<string, string> = {
+  beach:     'linear-gradient(145deg, #6ac4da 0%, #aadcec 40%, #e8d4a0 100%)',
+  nature:    'linear-gradient(145deg, #c08020 0%, #daa840 40%, #f0d890 100%)',
+  culture:   'linear-gradient(145deg, #904828 0%, #c07848 40%, #e8bea0 100%)',
+  adventure: 'linear-gradient(145deg, #284860 0%, #507088 40%, #90afc0 100%)',
+};
+---
+
+<article
+  class="flex flex-col bg-surface rounded-lg border border-outline-var overflow-hidden group hover:shadow-[0_8px_32px_rgba(0,30,51,0.1)] transition-shadow duration-300"
+  data-animate-card={dataAnimateCard !== undefined ? '' : undefined}
+>
+  <!-- Placeholder image — replace outer div with <Image> when photos are ready -->
+  <div
+    class="relative aspect-[16/10] overflow-hidden"
+    style={`background: ${gradients[category ?? 'nature']}`}
+  >
+    <!-- Layered silhouette gives depth to the gradient -->
+    <svg
+      viewBox="0 0 400 250"
+      xmlns="http://www.w3.org/2000/svg"
+      class="absolute bottom-0 left-0 w-full"
+      aria-hidden="true"
+    >
+      <path d="M0 185 Q100 148 200 170 Q300 192 400 155 L400 250 L0 250 Z" fill="rgba(0,0,0,0.07)" />
+      <path d="M0 215 Q100 198 200 210 Q300 222 400 202 L400 250 L0 250 Z" fill="rgba(0,0,0,0.05)" />
+    </svg>
+
+    <div class="absolute top-4 left-4">
+      <span class="text-label-sm bg-primary/85 text-on-primary px-3 py-1.5 rounded-sm backdrop-blur-sm">
+        {badge}
+      </span>
+    </div>
+
+    <div class="absolute bottom-4 right-4">
+      <span class="text-label-sm bg-surface/88 text-primary px-3 py-1.5 rounded-sm backdrop-blur-sm flex items-center gap-1.5">
+        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        {distance}
+      </span>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-3 p-6">
+    <h3 class="text-headline-md font-display text-primary">{title}</h3>
+    <p class="font-body text-on-surface-var text-base leading-relaxed">{body}</p>
+
+    {tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mt-1">
+        {tags.map((tag) => (
+          <span class="text-label-sm text-on-surface-var bg-surface-high px-3 py-1.5 rounded-sm">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+  </div>
+</article>
