@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 type FilterCategory =
   | 'all'
@@ -29,14 +29,53 @@ const FILTER_LABELS: Record<FilterCategory, string> = {
 
 export default function GalleryGrid({ images }: GalleryGridProps) {
   const [active, setActive] = useState<FilterCategory>('all');
-  const [lightbox, setLightbox] = useState<GalleryImage | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const filtered = active === 'all' ? images : images.filter((img) => img.category === active);
+  const isOpen = lightboxIndex !== null;
+  const current = isOpen ? filtered[lightboxIndex] : null;
 
-  // Only show filters that have images
   const availableFilters = (Object.keys(FILTER_LABELS) as FilterCategory[]).filter(
     (cat) => cat === 'all' || images.some((img) => img.category === cat)
   );
+
+  const close = useCallback(() => setLightboxIndex(null), []);
+  const prev = useCallback(() => setLightboxIndex((i) => (i !== null ? (i - 1 + filtered.length) % filtered.length : null)), [filtered.length]);
+  const next = useCallback(() => setLightboxIndex((i) => (i !== null ? (i + 1) % filtered.length : null)), [filtered.length]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+      else if (e.key === 'Escape') close();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isOpen, prev, next, close]);
+
+  // Lock body scroll when lightbox is open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
+  // Touch swipe support
+  const touchStartX = useRef<number | null>(null);
+  const onTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(delta) > 50) delta < 0 ? next() : prev();
+    touchStartX.current = null;
+  };
+
+  // When filter changes, close lightbox to avoid stale index
+  const handleFilterChange = (cat: FilterCategory) => {
+    setActive(cat);
+    setLightboxIndex(null);
+  };
 
   return (
     <>
@@ -45,7 +84,7 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
         {availableFilters.map((cat) => (
           <button
             key={cat}
-            onClick={() => setActive(cat)}
+            onClick={() => handleFilterChange(cat)}
             className={`font-body text-xs font-bold tracking-widest uppercase px-5 py-2.5 rounded-sm border-2 transition-all duration-200 ${
               active === cat
                 ? 'bg-primary text-on-primary border-primary'
@@ -63,7 +102,7 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
           <div
             key={`${img.src}-${i}`}
             className="break-inside-avoid overflow-hidden rounded-lg cursor-pointer group relative"
-            onClick={() => setLightbox(img)}
+            onClick={() => setLightboxIndex(i)}
           >
             <img
               src={img.src}
@@ -90,29 +129,68 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
       </div>
 
       {/* Lightbox */}
-      {lightbox && (
+      {isOpen && current && (
         <div
-          className="fixed inset-0 z-[200] bg-primary/95 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={() => setLightbox(null)}
+          className="fixed inset-0 z-[200] bg-primary/95 backdrop-blur-sm flex items-center justify-center"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image viewer"
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
         >
+          {/* Close */}
           <button
-            className="absolute top-6 right-6 text-white/80 hover:text-white transition-colors p-2"
-            aria-label="Close lightbox"
-            onClick={() => setLightbox(null)}
+            className="absolute top-4 right-4 md:top-6 md:right-6 text-white/70 hover:text-white transition-colors p-2 z-10"
+            aria-label="Close image viewer"
+            onClick={close}
           >
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
               <path d="M18 6L6 18M6 6l12 12" />
             </svg>
           </button>
-          <img
-            src={lightbox.src}
-            alt={lightbox.alt}
-            className="max-w-full max-h-[85vh] object-contain rounded-lg"
-            onClick={(e) => e.stopPropagation()}
-          />
-          <p className="absolute bottom-6 left-1/2 -translate-x-1/2 font-body text-white/60 text-sm">
-            {lightbox.alt}
-          </p>
+
+          {/* Prev arrow */}
+          <button
+            className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors p-3 md:p-4 rounded-full hover:bg-white/10 z-10"
+            aria-label="Previous image"
+            onClick={(e) => { e.stopPropagation(); prev(); }}
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+
+          {/* Image — clicking the image itself does nothing (prevents accidental close) */}
+          <div className="flex items-center justify-center w-full h-full px-16 md:px-24 py-16">
+            <img
+              key={current.src}
+              src={current.src}
+              alt={current.alt}
+              className="max-w-full max-h-[80vh] object-contain rounded-lg select-none"
+              draggable={false}
+            />
+          </div>
+
+          {/* Next arrow */}
+          <button
+            className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors p-3 md:p-4 rounded-full hover:bg-white/10 z-10"
+            aria-label="Next image"
+            onClick={(e) => { e.stopPropagation(); next(); }}
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+
+          {/* Counter + caption */}
+          <div className="absolute bottom-4 md:bottom-6 left-0 right-0 flex flex-col items-center gap-1 px-4">
+            <p className="font-body text-white/50 text-xs tracking-widest">
+              {lightboxIndex! + 1} / {filtered.length}
+            </p>
+            <p className="font-body text-white/60 text-sm text-center max-w-md">
+              {current.alt}
+            </p>
+          </div>
         </div>
       )}
     </>
