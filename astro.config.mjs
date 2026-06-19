@@ -1,9 +1,9 @@
-import { defineConfig, fontProviders } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
-import react from '@astrojs/react';
+import { defineConfig, fontProviders } from "astro/config";
+import tailwindcss from "@tailwindcss/vite";
+import react from "@astrojs/react";
 
 export default defineConfig({
-  site: 'https://villacalma.com',
+  site: "https://villacalma.pt",
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()],
@@ -11,19 +11,19 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: 'Poppins',
-      cssVariable: '--font-poppins',
+      name: "Poppins",
+      cssVariable: "--font-poppins",
       weights: [400, 500, 600],
-      styles: ['normal'],
-      subsets: ['latin'],
+      styles: ["normal"],
+      subsets: ["latin"],
     },
     {
       provider: fontProviders.google(),
-      name: 'DM Sans',
-      cssVariable: '--font-dm-sans',
+      name: "DM Sans",
+      cssVariable: "--font-dm-sans",
       weights: [400, 500, 700],
-      styles: ['normal'],
-      subsets: ['latin'],
+      styles: ["normal"],
+      subsets: ["latin"],
     },
   ],
 });
