@@ -73,18 +73,20 @@ const icons = {
           <h2 class="text-headline-lg font-display text-primary">The Details</h2>
         </div>
 
-        <div class="flex flex-col gap-14 divide-y divide-outline-var">
-          <AmenitiesGroup
-            groupName="The Apartment"
-            items={[
-              { icon: icons.floor, name: 'Lioz Limestone', description: 'Authentic local stone floors.' },
-              { icon: icons.kitchen, name: 'Modern Kitchen', description: 'Fully equipped for culinary exploration.' },
-              { icon: icons.climate, name: 'Climate Control', description: 'Perfect temperature all year round.' },
-            ]}
-            data-animate
-          />
+        <div class="flex flex-col divide-y divide-outline-var">
+          <div class="pb-10">
+            <AmenitiesGroup
+              groupName="The Apartment"
+              items={[
+                { icon: icons.floor, name: 'Lioz Limestone', description: 'Authentic local stone floors.' },
+                { icon: icons.kitchen, name: 'Modern Kitchen', description: 'Fully equipped for culinary exploration.' },
+                { icon: icons.climate, name: 'Climate Control', description: 'Perfect temperature all year round.' },
+              ]}
+              data-animate
+            />
+          </div>
 
-          <div class="pt-14">
+          <div class="pt-10">
             <AmenitiesGroup
               groupName="Relaxation"
               items={[
@@ -96,7 +98,7 @@ const icons = {
             />
           </div>
 
-          <div class="pt-14">
+          <div class="pt-10">
             <AmenitiesGroup
               groupName="Convenience"
               items={[

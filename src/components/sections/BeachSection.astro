@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import Button from '../ui/Button.astro';
 
 interface Props {
   eyebrow?: string;
@@ -10,6 +11,8 @@ interface Props {
   imageAlt: string;
   imagePosition?: 'left' | 'right';
   fullBleed?: boolean;
+  ctaLabel?: string;
+  ctaHref?: string;
   'data-animate'?: string;
 }
 
@@ -21,6 +24,8 @@ const {
   imageAlt,
   imagePosition = 'right',
   fullBleed = false,
+  ctaLabel,
+  ctaHref,
   'data-animate': dataAnimate,
 } = Astro.props;
 
@@ -52,6 +57,7 @@ const imageOrder = imagePosition === 'right' ? 'order-2' : 'order-1';
         {eyebrow && <span class="text-label-lg text-secondary tracking-widest">{eyebrow}</span>}
         <h2 class="text-headline-lg font-display text-primary">{heading}</h2>
         <p class="font-body text-on-surface-var text-lg leading-relaxed">{body}</p>
+        {ctaLabel && ctaHref && <Button href={ctaHref} variant="outline">{ctaLabel}</Button>}
       </div>
       <div class={`${imageOrder} overflow-hidden rounded-lg`}>
         <Image

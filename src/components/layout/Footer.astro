@@ -2,15 +2,11 @@
 const year = new Date().getFullYear();
 
 const footerLinks = [
-  { href: 'https://maps.google.com/?q=Vale+da+Ribeira+Lagos+Portugal', label: 'Location', external: true },
+  { href: 'https://maps.google.com/?q=Vale+da+Ribeira+Holidays', label: 'Location', external: true },
   { href: 'mailto:contact@villacalma.pt', label: 'Contact', external: false },
   { href: '/privacy-policy', label: 'Privacy Policy', external: false },
 ];
 
-const socialLinks = [
-  { href: '#', label: 'Instagram' },
-  { href: '#', label: 'LinkedIn' },
-];
 ---
 
 <footer class="bg-primary text-on-primary">
@@ -37,23 +33,6 @@ const socialLinks = [
                   href={href}
                   class="font-body text-sm text-white/70 hover:text-white transition-colors"
                   {...external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
-                >
-                  {label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <nav aria-label="Social links">
-          <ul class="flex flex-col gap-3 list-none p-0 m-0">
-            {socialLinks.map(({ href, label }) => (
-              <li>
-                <a
-                  href={href}
-                  class="font-body text-sm text-white/70 hover:text-white transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   {label}
                 </a>
