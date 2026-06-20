@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/layout/Nav';
 import Footer from '../components/layout/Footer.astro';
@@ -7,10 +8,12 @@ import BeachSection from '../components/sections/BeachSection.astro';
 import FeatureCard from '../components/ui/FeatureCard.astro';
 import Button from '../components/ui/Button.astro';
 
-import heroImage from '../assets/images/villa-terrace-hero.png';
-import workspaceImage from '../assets/images/villa-workspace.png';
-import ebikeImage from '../assets/images/villa-ebike.png';
-import beachImage from '../assets/images/meia-praia-beach.png';
+import heroImage from '../assets/images/balcony.avif';
+import workspaceImage from '../assets/images/living-room.avif';
+import ebikeImage from '../assets/images/villa-ebike.webp';
+import beachImage from '../assets/images/meia-praia.webp';
+import lagosImage from '../assets/images/lagos.webp';
+import locationImage from '../assets/images/location.avif';
 
 const jsonLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -92,8 +95,8 @@ const jsonLd = JSON.stringify({
           imageAlt="Minimalist workspace with infinity pool view"
           badge="WORKSPACE"
           title="Remote Work Ready"
-          body="Stay connected effortlessly. High-speed fibre internet paired with a dedicated, minimalist workspace offering inspiring views of the Algarve hills and the infinity pool."
-          tags={['Fibre Internet', 'Dedicated Desk']}
+          body="Stay connected effortlessly. High-speed internet paired with a dedicated, minimalist workspace offering inspiring views of the Algarve hills and the infinity pool."
+          tags={['High-Speed Internet', 'Dedicated Desk']}
           data-animate-card
         />
         <FeatureCard
@@ -124,8 +127,8 @@ const jsonLd = JSON.stringify({
       eyebrow="Your Neighbourhood"
       heading="Between the Cliffs and the Sea"
       body="Lagos is one of Portugal's most cherished coastal towns — a place where ancient fortified walls meet vibrant local culture. From the villa, the town's cafés, markets, and hidden beaches are all within easy reach."
-      image={beachImage}
-      imageAlt="Meia Praia beach with cliffs and turquoise water"
+      image={lagosImage}
+      imageAlt="Lagos town with cliffs and turquoise water"
       imagePosition="left"
       data-animate
     />
@@ -159,11 +162,14 @@ const jsonLd = JSON.stringify({
         </div>
 
         <div class="relative overflow-hidden rounded-2xl bg-surface-low flex items-center justify-center min-h-[420px]" data-animate>
-          <!-- Replace with <Image src={mapImage} ... /> once map image is ready -->
-          <div class="flex flex-col items-center gap-3 text-on-surface-var/50">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M9 3L3 6v15l6-3 6 3 6-3V3l-6 3-6-3z"/><path d="M9 3v15M15 6v15"/></svg>
-            <span class="text-label-lg tracking-widest">MAP COMING SOON</span>
-          </div>
+            <Image
+              src={locationImage}
+              alt="Villa location"
+              width={600}
+              height={600}
+              loading="lazy"
+              class="object-cover"
+            />
         </div>
       </div>
     </section>

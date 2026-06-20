@@ -7,9 +7,24 @@ import BeachSection from '../components/sections/BeachSection.astro';
 import FeatureCard from '../components/ui/FeatureCard.astro';
 import AttractionCard from '../components/ui/AttractionCard.astro';
 
-import beachImage from '../assets/images/meia-praia-beach.png';
-import ebikeImage from '../assets/images/villa-ebike.png';
-import workspaceImage from '../assets/images/villa-workspace.png';
+import beachImage from '../assets/images/meia-praia.webp';
+import ebikeImage from '../assets/images/villa-ebike.webp';
+import lagosImage from '../assets/images/lagos-old-town.webp';
+
+import donaAnaImage from '../assets/images/praia-dona-ana.webp';
+import camiloImage from '../assets/images/praia-do-camilo.webp';
+import luzImage from '../assets/images/praia-da-luz.webp';
+
+import bikingImage from '../assets/images/biking.webp';
+import kayakingImage from '../assets/images/kayak.avif';
+
+import pontaDaPiedadeImage from '../assets/images/ponta-da-piedade.webp';
+import caboImage from '../assets/images/cabo.webp';
+import autodromoImage from '../assets/images/autodromo.webp';
+
+import alvorImage from '../assets/images/alvor.webp';
+import silvesImage from '../assets/images/silves.webp';
+import monchiqueImage from '../assets/images/monchique.webp';
 ---
 
 <Layout
@@ -52,7 +67,7 @@ import workspaceImage from '../assets/images/villa-workspace.png';
       eyebrow="Lagos Old Town"
       heading="A City Written in Stone"
       body="Wander through the cobbled lanes of Lagos — a place where 16th-century Moorish walls frame colourful azulejo tiles and fishermen still bring the daily catch to market. The historic centre is a twenty-minute walk from the villa, or a five-minute ride on one of the villa's e-bikes."
-      image={workspaceImage}
+      image={lagosImage}
       imageAlt="Lagos old town historic architecture"
       imagePosition="left"
       data-animate
@@ -75,6 +90,7 @@ import workspaceImage from '../assets/images/villa-workspace.png';
             badge="BEACH"
             category="beach"
             title="Praia Dona Ana"
+            image={donaAnaImage}
             distance="8 min drive"
             body="Hemmed in by sculpted amber limestone cliffs, Dona Ana is one of the Algarve's most photographed beaches. Clear turquoise water and dramatic rock formations make it perfect for snorkelling and photography."
             tags={['Snorkelling', 'Iconic Cliffs']}
@@ -84,6 +100,7 @@ import workspaceImage from '../assets/images/villa-workspace.png';
             badge="BEACH"
             category="beach"
             title="Praia do Camilo"
+            image={camiloImage}
             distance="10 min drive"
             body="A hidden gem reached by a wooden staircase of 200 steps, Camilo rewards the effort with crystal-clear water and wild, rugged scenery. One of the quietest and most dramatic beaches near Lagos."
             tags={['Secluded', 'Wild Scenery']}
@@ -93,6 +110,7 @@ import workspaceImage from '../assets/images/villa-workspace.png';
             badge="BEACH"
             category="beach"
             title="Praia da Luz"
+            image={luzImage}      
             distance="15 min drive"
             body="A crescent of golden sand stretching a kilometre in front of a charming fishing village. Blue Flag certified, with calm waters ideal for families and a promenade of good seafood restaurants."
             tags={['Blue Flag', 'Village Promenade']}
@@ -116,7 +134,7 @@ import workspaceImage from '../assets/images/villa-workspace.png';
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" data-animate-group>
           <FeatureCard
-            image={ebikeImage}
+            image={bikingImage}
             imageAlt="E-bike on a scenic Portuguese coastal route"
             badge="CYCLING"
             title="Coastal Cycling Routes"
@@ -125,7 +143,7 @@ import workspaceImage from '../assets/images/villa-workspace.png';
             data-animate-card
           />
           <FeatureCard
-            image={beachImage}
+            image={kayakingImage}
             imageAlt="Sea caves and kayaks along the Algarve coastline"
             badge="WATER"
             title="Sea Caves & Kayaking"
@@ -154,6 +172,7 @@ import workspaceImage from '../assets/images/villa-workspace.png';
             badge="NATURE"
             category="nature"
             title="Ponta da Piedade"
+            image={pontaDaPiedadeImage}
             distance="12 min drive"
             body="The Algarve's most spectacular headland: a labyrinth of amber sea stacks, hidden grottos and sea arches carved by the Atlantic. Walk the clifftop path at sunset or kayak through the grottoes at water level."
             tags={['Clifftop Walk', 'Kayak Access']}
@@ -163,6 +182,7 @@ import workspaceImage from '../assets/images/villa-workspace.png';
             badge="LANDMARK"
             category="nature"
             title="Cabo de São Vicente"
+            image={caboImage}
             distance="35 min drive"
             body="The southwesternmost tip of continental Europe — where the land runs out and the Atlantic begins. Standing on the 75-metre cliffs beside the working lighthouse is a genuinely humbling experience."
             tags={['End of Europe', 'Sagres Nearby']}
@@ -172,6 +192,7 @@ import workspaceImage from '../assets/images/villa-workspace.png';
             badge="MOTORSPORT"
             category="adventure"
             title="Autódromo do Algarve"
+            image={autodromoImage}
             distance="25 min drive"
             body="Home to Formula 1, MotoGP and WorldSBK rounds, this world-class circuit welcomes visitors on track-day experiences, hot laps, and guided tours year-round. A unique thrill just down the road from Lagos."
             tags={['Track Days', 'F1 & MotoGP Venue']}
@@ -198,6 +219,7 @@ import workspaceImage from '../assets/images/villa-workspace.png';
             badge="VILLAGE"
             category="culture"
             title="Alvor"
+            image={alvorImage}
             distance="15 min drive"
             body="A whitewashed fishing village perched above a tidal estuary, Alvor has preserved its soul despite its proximity to Portimão. Wander the Moorish lanes, cross the boardwalk over the estuary, and end with freshly grilled fish."
             tags={['Estuary Boardwalk', 'Seafood']}
@@ -207,6 +229,7 @@ import workspaceImage from '../assets/images/villa-workspace.png';
             badge="HISTORY"
             category="culture"
             title="Silves"
+            image={silvesImage}
             distance="45 min drive"
             body="Once the Moorish capital of the Algarve, Silves is dominated by a perfectly preserved red sandstone castle. The town below is known for its annual Medieval Fair and some of the region's finest citrus groves."
             tags={['Medieval Castle', 'UNESCO Heritage']}
@@ -216,6 +239,7 @@ import workspaceImage from '../assets/images/villa-workspace.png';
             badge="MOUNTAIN"
             category="nature"
             title="Monchique"
+            image={monchiqueImage}
             distance="50 min drive"
             body="Escape the coast and climb to this mountain village in the Serra de Monchique. The panoramic views over the Algarve are extraordinary, and the local medronho — a potent arbutus berry spirit — is not to be missed."
             tags={['Panoramic Views', 'Local Spirits']}

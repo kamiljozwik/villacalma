@@ -7,7 +7,7 @@ import FeatureCard from '../components/ui/FeatureCard.astro';
 import AmenitiesGroup from '../components/sections/AmenitiesGroup.astro';
 
 import workspaceImage from '../assets/images/villa-workspace.png';
-import ebikeImage from '../assets/images/villa-ebike.png';
+import ebikeImage from '../assets/images/villa-ebike.webp';
 
 // Icon SVGs for amenities — rendered as static HTML by Astro
 const icons = {
@@ -28,7 +28,7 @@ const icons = {
 
 <Layout
   title="Amenities"
-  description="Discover Villa Calma's thoughtfully curated amenities — from an infinity pool overlooking the Algarve to a remote-work-ready workspace with high-speed fibre internet."
+  description="Discover Villa Calma's thoughtfully curated amenities — from an infinity pool overlooking the Algarve to a remote-work-ready workspace with high-speed internet."
 >
   <Nav client:load currentPath="/amenities" />
 
@@ -52,8 +52,8 @@ const icons = {
           imageAlt="Minimalist workspace with infinity pool view and Algarve hills"
           badge="WORKSPACE"
           title="Remote Work Ready"
-          body="Stay connected effortlessly. High-speed fibre internet paired with a dedicated, minimalist workspace offering inspiring views of the Algarve hills and the infinity pool. Designed for focus."
-          tags={['Fibre Internet', 'Dedicated Desk']}
+          body="Stay connected effortlessly. High-speed internet paired with a dedicated, minimalist workspace offering inspiring views of the Algarve hills and the infinity pool. Designed for focus."
+          tags={['High-Speed Internet', 'Dedicated Desk']}
           data-animate-card
         />
         <FeatureCard
