@@ -12,14 +12,18 @@ interface Props {
 }
 
 const { groupName, items, 'data-animate': dataAnimate } = Astro.props;
+
+const itemsGridClass = items.length === 4
+  ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-6'
+  : 'grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-6';
 ---
 
-<div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-8 items-start" data-animate={dataAnimate}>
+<div class="py-10 first:pt-0 grid grid-cols-1 md:grid-cols-[200px_1fr] gap-8 items-start" data-animate={dataAnimate}>
   <div class="md:pt-1">
     <h3 class="font-display text-primary font-medium text-xl">{groupName}</h3>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-6">
+  <div class={itemsGridClass}>
     {items.map(({ icon, name, description }) => (
       <div class="flex gap-4 items-start">
         <div class="w-5 h-5 mt-0.5 flex-shrink-0 text-secondary" set:html={icon} />
