@@ -7,33 +7,126 @@ import SectionHeader from '../components/ui/SectionHeader.astro';
 import GalleryGrid from '../components/gallery/GalleryGrid';
 import Button from '../components/ui/Button.astro';
 
-import terraceImg from '../assets/images/villa-terrace-hero.png';
-import workspaceImg from '../assets/images/villa-workspace.png';
-import beachImg from '../assets/images/meia-praia.webp';
-import ebikeImg from '../assets/images/villa-ebike.webp';
+// Gallery images
+import bedroom1 from '../assets/images/gallery/bedroom-1.avif';
+import bedroom2 from '../assets/images/gallery/bedroom-2.avif';
+import bedroom3 from '../assets/images/gallery/bedroom-3.avif';
+import bedroom4 from '../assets/images/gallery/bedroom-4.avif';
+import bedroom5 from '../assets/images/gallery/bedroom-5.avif';
+import diningAreaHallway from '../assets/images/gallery/dining-area-hallway-view.avif';
+import diningAreaLivingRoom from '../assets/images/gallery/dining-area-living-room-view.avif';
+import forChildren from '../assets/images/gallery/for-children.avif';
+import garden1 from '../assets/images/gallery/garden-1.avif';
+import garden2 from '../assets/images/gallery/garden-2.avif';
+import garden4 from '../assets/images/gallery/garden-4.avif';
+import kitchenDiningAngle from '../assets/images/gallery/kitchen-dining-angle.avif';
+import kitchenWideView from '../assets/images/gallery/kitchen-wide-view.avif';
+import livingRoom1 from '../assets/images/gallery/living-room-1.avif';
+import livingRoom2 from '../assets/images/gallery/living-room-2.avif';
+import livingRoom3 from '../assets/images/gallery/living-room-3.avif';
+import livingRoomSofaAngle from '../assets/images/gallery/living-room-sofa-angle.avif';
+import livingRoom from '../assets/images/gallery/living-room.avif';
+import pool1 from '../assets/images/gallery/pool-1.avif';
+import pool2Img from '../assets/images/gallery/pool-2.webp';
+import pool3 from '../assets/images/gallery/pool-3.avif';
+import pool4 from '../assets/images/gallery/pool-4.avif';
+import pool5 from '../assets/images/gallery/pool-5.avif';
+import pool6Img from '../assets/images/gallery/pool-6.webp';
+import terrace1Img from '../assets/images/gallery/terrace-1.webp';
+import terrace2 from '../assets/images/gallery/terrace-2.avif';
+import terrace3 from '../assets/images/gallery/terrace-3.avif';
 
 // Process all images to optimized WebP at build time
-const [terrace1, terrace2, workspace1, workspace2, beach1, beach2, ebike1, ebike2] =
-  await Promise.all([
-    getImage({ src: terraceImg, width: 900, format: 'webp', quality: 85 }),
-    getImage({ src: terraceImg, width: 600, format: 'webp', quality: 80 }),
-    getImage({ src: workspaceImg, width: 900, format: 'webp', quality: 85 }),
-    getImage({ src: workspaceImg, width: 600, format: 'webp', quality: 80 }),
-    getImage({ src: beachImg, width: 900, format: 'webp', quality: 85 }),
-    getImage({ src: beachImg, width: 600, format: 'webp', quality: 80 }),
-    getImage({ src: ebikeImg, width: 900, format: 'webp', quality: 85 }),
-    getImage({ src: ebikeImg, width: 600, format: 'webp', quality: 80 }),
-  ]);
+const [
+  bedroom1_lg, bedroom2_lg, bedroom3_lg, bedroom4_lg, bedroom5_lg,
+  diningAreaHallway_lg, diningAreaLivingRoom_lg,
+  forChildren_lg,
+  garden1_lg, garden2_lg, garden4_lg,
+  kitchenDiningAngle_lg, kitchenWideView_lg,
+  livingRoom1_lg, livingRoom2_lg, livingRoom3_lg, livingRoomSofaAngle_lg, livingRoom_lg,
+  pool1_lg, pool2_lg, pool3_lg, pool4_lg, pool5_lg, pool6_lg,
+  terrace1_lg, terrace2_lg, terrace3_lg,
+] = await Promise.all([
+  // Bedrooms
+  getImage({ src: bedroom1, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: bedroom2, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: bedroom3, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: bedroom4, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: bedroom5, width: 900, format: 'webp', quality: 85 }),
+  // Dining area
+  getImage({ src: diningAreaHallway, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: diningAreaLivingRoom, width: 900, format: 'webp', quality: 85 }),
+  // For children
+  getImage({ src: forChildren, width: 900, format: 'webp', quality: 85 }),
+  // Garden
+  getImage({ src: garden1, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: garden2, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: garden4, width: 900, format: 'webp', quality: 85 }),
+  // Kitchen
+  getImage({ src: kitchenDiningAngle, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: kitchenWideView, width: 900, format: 'webp', quality: 85 }),
+  // Living room
+  getImage({ src: livingRoom1, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: livingRoom2, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: livingRoom3, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: livingRoomSofaAngle, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: livingRoom, width: 900, format: 'webp', quality: 85 }),
+  // Pools
+  getImage({ src: pool1, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: pool2Img, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: pool3, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: pool4, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: pool5, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: pool6Img, width: 900, format: 'webp', quality: 85 }),
+  // Terraces
+  getImage({ src: terrace1Img, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: terrace2, width: 900, format: 'webp', quality: 85 }),
+  getImage({ src: terrace3, width: 900, format: 'webp', quality: 85 }),
+]);
 
 const galleryImages = [
-  { src: terrace1.src, width: 900, height: 600, alt: 'Villa Calma terrace at sunset', category: 'property-interior' as const },
-  { src: workspace1.src, width: 900, height: 675, alt: 'Minimalist workspace with infinity pool view', category: 'property-interior' as const },
-  { src: beach1.src, width: 900, height: 500, alt: 'Aerial view of Meia Praia beach', category: 'surrounding-area' as const },
-  { src: ebike1.src, width: 900, height: 675, alt: 'Premium e-bike against whitewashed Algarve wall', category: 'nearby-attractions' as const },
-  { src: terrace2.src, width: 600, height: 450, alt: 'Villa Calma outdoor terrace with garden', category: 'property-interior' as const },
-  { src: beach2.src, width: 600, height: 338, alt: 'Golden cliffs and Atlantic ocean at Meia Praia', category: 'surrounding-area' as const },
-  { src: workspace2.src, width: 600, height: 450, alt: 'Workspace with panoramic Algarve views', category: 'swimming-pool' as const },
-  { src: ebike2.src, width: 600, height: 450, alt: 'Coastal cycling route along the Algarve', category: 'nearby-attractions' as const },
+  // Bedrooms (5 images)
+  { src: bedroom1_lg.src, width: 900, height: 675, alt: 'Modern master bedroom with natural light', category: 'property-interior' as const },
+  { src: bedroom2_lg.src, width: 900, height: 675, alt: 'Comfortable guest bedroom with contemporary design', category: 'property-interior' as const },
+  { src: bedroom3_lg.src, width: 900, height: 675, alt: 'Luxury bedroom suite with premium furnishings', category: 'property-interior' as const },
+  { src: bedroom4_lg.src, width: 900, height: 675, alt: 'Elegant bedroom overlooking villa grounds', category: 'property-interior' as const },
+  { src: bedroom5_lg.src, width: 900, height: 675, alt: 'Airy bedroom with sunset views', category: 'property-interior' as const },
+
+  // Dining Areas (2 images)
+  { src: diningAreaHallway_lg.src, width: 900, height: 675, alt: 'Elegant dining area with hallway view', category: 'property-interior' as const },
+  { src: diningAreaLivingRoom_lg.src, width: 900, height: 675, alt: 'Open-plan dining area overlooking living room', category: 'property-interior' as const },
+
+  // Family-Friendly (1 image)
+  { src: forChildren_lg.src, width: 900, height: 675, alt: 'Family-friendly space perfect for children', category: 'property-interior' as const },
+
+  // Gardens (3 images)
+  { src: garden1_lg.src, width: 900, height: 675, alt: 'Lush villa gardens with seating areas', category: 'property-interior' as const },
+  { src: garden2_lg.src, width: 900, height: 675, alt: 'Manicured gardens surrounding the villa', category: 'property-interior' as const },
+  { src: garden4_lg.src, width: 900, height: 675, alt: 'Scenic garden overlook with lounging area', category: 'property-interior' as const },
+
+  // Kitchen (2 images)
+  { src: kitchenDiningAngle_lg.src, width: 900, height: 675, alt: 'Modern kitchen with dining area connection', category: 'property-interior' as const },
+  { src: kitchenWideView_lg.src, width: 900, height: 675, alt: 'Spacious kitchen with panoramic counters', category: 'property-interior' as const },
+
+  // Living Rooms (5 images)
+  { src: livingRoom1_lg.src, width: 900, height: 675, alt: 'Expansive living room with comfort seating', category: 'property-interior' as const },
+  { src: livingRoom2_lg.src, width: 900, height: 675, alt: 'Modern living room with contemporary furnishings', category: 'property-interior' as const },
+  { src: livingRoom3_lg.src, width: 900, height: 675, alt: 'Luxurious living room with premium finishes', category: 'property-interior' as const },
+  { src: livingRoomSofaAngle_lg.src, width: 900, height: 675, alt: 'Living room sofa arrangement with scenic view', category: 'property-interior' as const },
+  { src: livingRoom_lg.src, width: 900, height: 675, alt: 'Comprehensive living room with panoramic views', category: 'property-interior' as const },
+
+  // Pools (6 images)
+  { src: pool1_lg.src, width: 900, height: 675, alt: 'Stunning infinity pool with relaxation areas', category: 'swimming-pool' as const },
+  { src: pool2_lg.src, width: 900, height: 501, alt: 'Aerial view of villa infinity pool with sun loungers', category: 'swimming-pool' as const },
+  { src: pool3_lg.src, width: 900, height: 675, alt: 'Crystal-clear pool water with surrounding deck', category: 'swimming-pool' as const },
+  { src: pool4_lg.src, width: 900, height: 675, alt: 'Pool area with shade structures and seating', category: 'swimming-pool' as const },
+  { src: pool5_lg.src, width: 900, height: 675, alt: 'Evening view of the illuminated infinity pool', category: 'swimming-pool' as const },
+  { src: pool6_lg.src, width: 900, height: 506, alt: 'Infinity pool with pergola overlooking Algarve landscape', category: 'swimming-pool' as const },
+
+  // Terraces (3 images)
+  { src: terrace1_lg.src, width: 900, height: 675, alt: 'Alfresco dining on the villa terrace with panoramic views', category: 'property-interior' as const },
+  { src: terrace2_lg.src, width: 900, height: 675, alt: 'Spacious outdoor terrace with garden views', category: 'property-interior' as const },
+  { src: terrace3_lg.src, width: 900, height: 675, alt: 'Multi-level terrace with Algarve vistas', category: 'property-interior' as const },
 ];
 ---
 
@@ -44,7 +137,7 @@ const galleryImages = [
   <Nav client:load currentPath="/gallery" />
 
   <main class="pt-20">
-    <section class="w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 py-20 md:py-28">
+    <section class="w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16 py-20 md:py-28">
       <div class="mb-14 text-center" data-animate>
         <SectionHeader
           eyebrow="Visual Journey"
