@@ -3,7 +3,7 @@ interface Props {
   icon: string;
   title: string;
   body: string;
-  'data-animate-card'?: string;
+  'data-animate-card'?: string | boolean;
 }
 
 const { icon, title, body, 'data-animate-card': dataAnimateCard } = Astro.props;

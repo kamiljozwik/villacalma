@@ -9,7 +9,7 @@ interface Props {
   title: string;
   body: string;
   tags?: string[];
-  'data-animate-card'?: string;
+  'data-animate-card'?: string | boolean;
 }
 
 const { image, imageAlt, badge, title, body, tags = [], 'data-animate-card': dataAnimateCard } = Astro.props;

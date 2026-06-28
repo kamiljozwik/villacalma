@@ -8,7 +8,7 @@ interface AmenityItem {
 interface Props {
   groupName: string;
   items: AmenityItem[];
-  'data-animate'?: string;
+  'data-animate'?: string | boolean;
 }
 
 const { groupName, items, 'data-animate': dataAnimate } = Astro.props;

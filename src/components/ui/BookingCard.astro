@@ -9,7 +9,7 @@ interface Props {
   platform: 'airbnb' | 'booking';
   href: string;
   ctaLabel: string;
-  'data-animate-card'?: string;
+  'data-animate-card'?: string | boolean;
 }
 
 const { platform, href, ctaLabel, 'data-animate-card': dataAnimateCard } = Astro.props;
@@ -20,15 +20,24 @@ const { platform, href, ctaLabel, 'data-animate-card': dataAnimateCard } = Astro
   class="flex flex-col bg-white border border-outline-var rounded-lg overflow-hidden"
   data-animate-card={dataAnimateCard}
 >
-  <div class="flex flex-1 items-center justify-center px-8 py-10">
-    <img
-      src={`./public/${platform}.png`}
-      alt={`${platform} logo`}
-      class="max-h-10 w-auto object-contain"
-      width={300}
-      height={50}
-    />
-  </div>
+<div class="flex flex-1 items-center justify-center px-8 py-10">
+  <img
+    src={`/${platform}.png`}
+    alt={`${platform} logo`}
+    class="max-h-10 w-auto object-contain"
+    width={300}
+    height={50}
+  />
+</div>
+<!-- <div class="flex flex-1 items-center justify-center px-8 py-10">
+  <Image
+    src={platform === 'airbnb' ? airbnb : booking}
+    alt={`${platform} logo`}
+    class="max-h-10 w-auto object-contain"
+    width={300}
+    height={50}
+  />
+</div> -->
 
   <div class="border-t border-outline-var px-8 py-6">
     <Button href={href} variant="primary" external class="w-full justify-center whitespace-nowrap">
