@@ -1,44 +1,37 @@
 ---
+import { Image } from 'astro:assets';
 import Button from './Button.astro';
+
+import airbnb from '../../assets/airbnb.png';
+import booking from '../../assets/booking.png';
 
 interface Props {
   platform: 'airbnb' | 'booking';
-  title: string;
-  body: string;
   href: string;
   ctaLabel: string;
   'data-animate-card'?: string;
 }
 
-const { platform, title, body, href, ctaLabel, 'data-animate-card': dataAnimateCard } = Astro.props;
+const { platform, href, ctaLabel, 'data-animate-card': dataAnimateCard } = Astro.props;
 
-const platformStyles = {
-  airbnb: { accent: '#FF5A5F', label: 'airbnb' },
-  booking: { accent: '#003580', label: 'Booking.com' },
-};
-
-const style = platformStyles[platform];
 ---
 
 <article
   class="flex flex-col bg-white border border-outline-var rounded-lg overflow-hidden"
   data-animate-card={dataAnimateCard}
 >
-  <div class="px-8 pt-8 pb-4">
-    <!-- Platform wordmark -->
-    <div class="mb-6">
-      {platform === 'airbnb' ? (
-        <span class="font-body font-bold text-2xl" style={`color: ${style.accent}`}>airbnb</span>
-      ) : (
-        <span class="font-body font-bold text-2xl" style={`color: ${style.accent}`}>Booking.com</span>
-      )}
-    </div>
-    <h3 class="text-headline-md font-display text-primary mb-4">{title}</h3>
-    <p class="font-body text-on-surface-var text-base leading-relaxed">{body}</p>
+  <div class="flex flex-1 items-center justify-center px-8 py-10">
+    <img
+      src={`./public/${platform}.png`}
+      alt={`${platform} logo`}
+      class="max-h-10 w-auto object-contain"
+      width={300}
+      height={50}
+    />
   </div>
 
-  <div class="px-8 pb-8 mt-auto pt-6">
-    <Button href={href} variant="primary" external class="w-full justify-center">
+  <div class="border-t border-outline-var px-8 py-6">
+    <Button href={href} variant="primary" external class="w-full justify-center whitespace-nowrap">
       {ctaLabel}
     </Button>
   </div>
